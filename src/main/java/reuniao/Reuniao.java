@@ -9,15 +9,13 @@ public class Reuniao {
     private LocalDate inicio;
     private LocalDate fim;
     private List<Participante> participantes;
+    private int qtdParticipantes;
 
     public Reuniao(LocalDate inicio, LocalDate fim, List<String> participantes) {
         this.inicio = inicio;
         this.fim = fim;
         this.participantes = new ArrayList<>();
-        for( String participante : participantes){
-            Participante p = new Participante(participante);
-            this.participantes.add(p);
-        }
+        this.qtdParticipantes = participantes.size();
     }
 
     public LocalDate getInicio() {
@@ -42,5 +40,13 @@ public class Reuniao {
 
     public void setParticipantes(List<Participante> participantes) {
         this.participantes = participantes;
+    }
+
+    public int getQtdParticipantes() {
+        return qtdParticipantes;
+    }
+
+    public void setQtdParticipantes(int qtdParticipantes) {
+        this.qtdParticipantes = qtdParticipantes;
     }
 }
