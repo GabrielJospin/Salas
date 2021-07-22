@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class MarcadorDeReuniao {
 
@@ -21,7 +20,8 @@ public class MarcadorDeReuniao {
                                         LocalDateTime inicio,
                                         LocalDateTime fim){
 
-        reuniao.getParticipantes().add(new Participante(participante,inicio,fim));
+        if(reuniao.getMail().contains(participante))
+            reuniao.getDisponibilidade().add(new Participante(participante,inicio,fim));
 
     }
 
@@ -39,17 +39,19 @@ public class MarcadorDeReuniao {
 
     public void mostraSobreposicao(){
 
-        reuniao.getParticipantes().forEach(p->{
+        reuniao.getDisponibilidade().forEach(p->{
             String nome = p.getNome();
             LocalDateTime inicio = p.getInicio();
             LocalDateTime fim = p.getFim();
             System.out.printf("%s disponivel em %s a %s\n",nome,inicio.toString(),fim.toString());
         });
 
+        System.out.println("SAIDA:\n");
+
         Map<LocalDateTime,Integer> disponibilidade = prepareList();
 
-        for(int i = 0; i<reuniao.getParticipantes().size();i++){
-            Participante p = reuniao.getParticipantes().get(i);
+        for(int i = 0; i<reuniao.getDisponibilidade().size(); i++){
+            Participante p = reuniao.getDisponibilidade().get(i);
             LocalDateTime inicio = LocalDateTime.of(reuniao.getInicio(),LocalTime.of(0,0)) ;
             long timeI = inicio.until(p.getInicio(),ChronoUnit.HOURS);
             long timeF = inicio.until(p.getFim(),ChronoUnit.HOURS);

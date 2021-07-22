@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'com.sun.xml.ws', name: 'jaxws-rt', version: '2.1.4'
 }
 
 application{

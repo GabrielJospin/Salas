@@ -8,14 +8,16 @@ public class Reuniao {
 
     private LocalDate inicio;
     private LocalDate fim;
-    private List<Participante> participantes;
+    private List<Participante> disponibilidade;
+    private List<String> mail;
     private int qtdParticipantes;
 
-    public Reuniao(LocalDate inicio, LocalDate fim, List<String> participantes) {
+    public Reuniao(LocalDate inicio, LocalDate fim, List<String> mail) {
         this.inicio = inicio;
         this.fim = fim;
-        this.participantes = new ArrayList<>();
-        this.qtdParticipantes = participantes.size();
+        this.disponibilidade = new ArrayList<>();
+        this.qtdParticipantes = mail.size();
+        this.mail = mail;
     }
 
     public LocalDate getInicio() {
@@ -34,12 +36,12 @@ public class Reuniao {
         this.fim = fim;
     }
 
-    public List<Participante> getParticipantes() {
-        return participantes;
+    public List<Participante> getDisponibilidade() {
+        return disponibilidade;
     }
 
-    public void setParticipantes(List<Participante> participantes) {
-        this.participantes = participantes;
+    public void setDisponibilidade(List<Participante> disponibilidade) {
+        this.disponibilidade = disponibilidade;
     }
 
     public int getQtdParticipantes() {
@@ -48,5 +50,13 @@ public class Reuniao {
 
     public void setQtdParticipantes(int qtdParticipantes) {
         this.qtdParticipantes = qtdParticipantes;
+    }
+
+    public List<String> getMail() {
+        return mail;
+    }
+
+    public void setMail(List<String> mail) {
+        this.mail = mail;
     }
 }
