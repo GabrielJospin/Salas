@@ -42,14 +42,11 @@ public class Reuniao {
 
     public void setDisponibilidade(List<Disponibilidade> disponibilidade) {
         this.disponibilidade = disponibilidade;
+        this.qtdParticipantes = disponibilidade.size();
     }
 
     public int getQtdParticipantes() {
         return qtdParticipantes;
-    }
-
-    public void setQtdParticipantes(int qtdParticipantes) {
-        this.qtdParticipantes = qtdParticipantes;
     }
 
     public List<String> getMail() {
