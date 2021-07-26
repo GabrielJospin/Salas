@@ -8,7 +8,7 @@ public class Reuniao {
 
     private LocalDate inicio;
     private LocalDate fim;
-    private List<Participante> disponibilidade;
+    private List<Disponibilidade> disponibilidade;
     private List<String> mail;
     private int qtdParticipantes;
 
@@ -36,11 +36,11 @@ public class Reuniao {
         this.fim = fim;
     }
 
-    public List<Participante> getDisponibilidade() {
+    public List<Disponibilidade> getDisponibilidade() {
         return disponibilidade;
     }
 
-    public void setDisponibilidade(List<Participante> disponibilidade) {
+    public void setDisponibilidade(List<Disponibilidade> disponibilidade) {
         this.disponibilidade = disponibilidade;
     }
 

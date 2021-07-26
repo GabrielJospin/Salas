@@ -2,30 +2,30 @@ package reuniao;
 
 import java.time.LocalDateTime;
 
-public class Participante {
+public class Disponibilidade {
 
-    private String nome;
+    private String mail;
     private LocalDateTime inicio;
     private LocalDateTime fim;
 
-    public Participante(String nome) {
-        this.nome = nome;
+    public Disponibilidade(String mail) {
+        this.mail = mail;
         this.inicio = LocalDateTime.of(0,1,1,0,0);
         this.fim = LocalDateTime.of(0,1,1,0,0);
     }
 
-    public Participante(String nome, LocalDateTime inicio, LocalDateTime fim) {
-        this.nome = nome;
+    public Disponibilidade(String mail, LocalDateTime inicio, LocalDateTime fim) {
+        this.mail = mail;
         this.inicio = inicio;
         this.fim = fim;
     }
 
-    public String getNome() {
-        return nome;
+    public String getMail() {
+        return mail;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public LocalDateTime getInicio() {

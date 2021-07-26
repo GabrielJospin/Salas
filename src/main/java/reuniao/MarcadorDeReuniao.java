@@ -21,7 +21,7 @@ public class MarcadorDeReuniao {
                                         LocalDateTime fim){
 
         if(reuniao.getMail().contains(participante))
-            reuniao.getDisponibilidade().add(new Participante(participante,inicio,fim));
+            reuniao.getDisponibilidade().add(new Disponibilidade(participante,inicio,fim));
 
     }
 
@@ -39,19 +39,12 @@ public class MarcadorDeReuniao {
 
     public void mostraSobreposicao(){
 
-        reuniao.getDisponibilidade().forEach(p->{
-            String nome = p.getNome();
-            LocalDateTime inicio = p.getInicio();
-            LocalDateTime fim = p.getFim();
-            System.out.printf("%s disponivel em %s a %s\n",nome,inicio.toString(),fim.toString());
-        });
-
         System.out.println("SAIDA:\n");
 
         Map<LocalDateTime,Integer> disponibilidade = prepareList();
 
         for(int i = 0; i<reuniao.getDisponibilidade().size(); i++){
-            Participante p = reuniao.getDisponibilidade().get(i);
+            Disponibilidade p = reuniao.getDisponibilidade().get(i);
             LocalDateTime inicio = LocalDateTime.of(reuniao.getInicio(),LocalTime.of(0,0)) ;
             long timeI = inicio.until(p.getInicio(),ChronoUnit.HOURS);
             long timeF = inicio.until(p.getFim(),ChronoUnit.HOURS);
@@ -69,7 +62,13 @@ public class MarcadorDeReuniao {
             LocalDateTime position = inicio.plus(i,ChronoUnit.HOURS);
             int value = disponibilidade.get(position);
             if(value == reuniao.getQtdParticipantes()){
-                System.out.printf("%s tem todos os participantes\n",position.toString());
+                System.out.printf("Todos os participantes disponíveis as: %d:%d do dia %s (%d/%s/%d) \n",
+                        position.getHour(),
+                        position.getMinute(),
+                        position.getDayOfWeek().toString(),
+                        position.getDayOfMonth(),
+                        position.getMonth().toString(),
+                        position.getYear());
             }
         }
 

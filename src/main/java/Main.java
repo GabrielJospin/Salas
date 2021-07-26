@@ -1,11 +1,9 @@
 import exception.HorarioConflitante;
 import exception.SalaInexistente;
 import reuniao.MarcadorDeReuniao;
-import reuniao.Participante;
 import salas.Reserva;
 import salas.SalasManager;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.time.LocalDate;
@@ -40,40 +38,50 @@ public class Main {
             manager.reservaSalaChamada("amarela",
                     LocalDateTime.of(2021, 8, 10, 9, 0),
                     LocalDateTime.of(2021, 8, 10, 11, 0));
-        } catch (SalaInexistente | HorarioConflitante e){
-            e.printStackTrace();
+        } catch (SalaInexistente e){
+            System.out.println(e.getMessageName() +": A sala pedida não existe");
+        } catch (HorarioConflitante e){
+            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
         }
 
         try {
             manager.reservaSalaChamada("amarela",
                     LocalDateTime.of(2021, 8, 10, 10, 0),
                     LocalDateTime.of(2021, 8, 10, 12, 0));
-        } catch (SalaInexistente | HorarioConflitante e){
-            e.printStackTrace();
+        } catch (SalaInexistente e){
+            System.out.println(e.getMessageName() +": A sala pedida não existe");
+        } catch (HorarioConflitante e){
+            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
         }
 
         try {
             manager.reservaSalaChamada("amarela",
                     LocalDateTime.of(2021, 8, 10, 8, 0),
                     LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente | HorarioConflitante e){
-            e.printStackTrace();
+        } catch (SalaInexistente e){
+            System.out.println(e.getMessageName() +": A sala pedida não existe");
+        } catch (HorarioConflitante e){
+            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
         }
 
         try {
             manager.reservaSalaChamada("azul",
                     LocalDateTime.of(2021, 8, 10, 8, 0),
                     LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente | HorarioConflitante e){
-            e.printStackTrace();
+        } catch (SalaInexistente e){
+            System.out.println(e.getMessageName() +": A sala pedida não existe");
+        } catch (HorarioConflitante e){
+            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
         }
 
         try {
             manager.reservaSalaChamada("cor de burro quando foge",
                     LocalDateTime.of(2021, 8, 10, 8, 0),
                     LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente | HorarioConflitante e){
-            e.printStackTrace();
+        } catch (SalaInexistente e){
+            System.out.println(e.getMessageName() +": A sala pedida não existe");
+        } catch (HorarioConflitante e){
+            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
         }
 
 
@@ -92,7 +100,6 @@ public class Main {
         participantes.add("Duda");
         participantes.add("Frodo");
         participantes.add("Gii");
-        participantes.add("Balog");
 
         mr.marcarReuniaoEntre(LocalDate.of(2021,10,2),
                 LocalDate.of(2021,10,3),participantes);
