@@ -2,6 +2,7 @@ import exception.HorarioConflitante;
 import exception.SalaInexistente;
 import reuniao.MarcadorDeReuniao;
 import salas.Reserva;
+import salas.Sala;
 import salas.SalasManager;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,76 @@ import java.util.*;
 import java.time.LocalDate;
 
 public class Main {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    private static void cadastrarSala(){
+        try {
+            System.out.println("Cadastro de Salas");
+            System.out.println("");
+
+            System.out.println("Qual o nome da sala? ");
+            String nome = scanner.nextLine();
+
+            System.out.println("Qual a capacidade máxima da sala? ");
+            int capacidade = scanner.nextInt();
+
+            System.out.println("Escreva uma breve descrição de 1 linha da sala");
+            String desc = scanner.nextLine();
+
+            SalasManager salasManager = SalasManager.instanceOfSalasManager();
+            salasManager.adicionaSalaChamada(nome, capacidade, desc);
+
+            System.out.println("Deseja cadastrar nova sala? 1- sim/ 0-não");
+            int answer = scanner.nextInt();
+
+            if(answer==1)
+                cadastrarSala();
+            else
+                hello();
+
+        }catch (Exception e){
+            System.out.println("Entrada invalida");
+            System.out.println("Tente novamente");
+            cadastrarSala();
+        }
+    }
+
+
+    private static void reservarSala() {
+
+    }
+
+    private static void criarReuniao() {
+
+    }
+
+    private static void hello(){
+        System.out.println("*********************************************************");
+        System.out.println("Bem vindo ao App Reserva de salas");
+        System.out.println("");
+        System.out.println("O que deseja fazer?");
+        System.out.println("1- Cadastrar Salas");
+        System.out.println("2- Criar reunião");
+        System.out.println("3- Reservar Sala");
+        System.out.println("4- Sair");
+        int option = scanner.nextInt();
+        switch (option){
+            case 1:
+                cadastrarSala();
+                break;
+            case 2:
+                criarReuniao();
+                break;
+            case 3:
+                reservarSala();
+                break;
+            default:
+                break;
+        }
+
+    }
+
 
     public static void main(String[] args) {
         System.out.println("*********************************************************");
