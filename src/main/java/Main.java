@@ -241,6 +241,8 @@ public class Main {
             case 5:
                 listaDeReservas();
                 break;
+            case 6:
+                cancelarReserva();
             case 42:
                 answer();
                 break;
@@ -248,6 +250,27 @@ public class Main {
                 break;
         }
 
+    }
+
+    private static void cancelarReserva() {
+        System.out.println("Opa então vamos cançelar esta reserva");
+        System.out.println("Para isso precisaremos dos dados desta reserva");
+        try{
+            SalasManager sm = SalasManager.instanceOfSalasManager();
+
+            System.out.println("Qual a sala reservada?");
+            String sala = scanner.nextLine();
+            System.out.println("Qual o horário de inicio");
+            LocalDateTime inicio = inserirHorario();
+            System.out.println("Qual o horario do fim");
+            LocalDateTime fim  = inserirHorario();
+
+            sm.removeSalaChamada(sala);
+        }catch (Exception e){
+            System.out.println("Opa tivemos um erro de inserção");
+            System.out.println("vamos tentar novamente");
+            cancelarReserva();
+        }
     }
 
     private static void listaDeReservas() {
@@ -258,9 +281,7 @@ public class Main {
         String sala = scanner.nextLine();
         System.out.printf("Reservas para a sala %s \n",sala);
 
-        sm.reservasParaSala(sala).forEach( s ->{
-            System.out.printf("das %s às %s\n", s.getDataInicial(), s.getDataFinal());
-        });
+        sm.imprimeReservaDaSala(sala);
     }
 
     private static void listaDeSalas() {
@@ -299,117 +320,12 @@ public class Main {
         System.out.println("*********************************************************");
         System.out.println("Reserva de Salas");
         System.out.println("");
-        MarcadorDeReuniao mr = new MarcadorDeReuniao();
-        List<String> participantes = new ArrayList<>();
-        List<String> salas = new ArrayList<>();
 
-        salas.add("Amarela");
-        salas.add("Azul");
-        salas.add("vermelha");
+        hello();
 
-        SalasManager manager = SalasManager.instanceOfSalasManager();
-
-        manager.adicionaSalaChamada("Amarela",10,"Sala do Infantil I");
-        manager.adicionaSalaChamada("Azul",15,"Sala do Infantil II");
-        manager.adicionaSalaChamada("Vermelha",13,"Sala do Infantil III");
-
-        manager.removeSalaChamada("vermelha");
-
-        System.out.println(manager.listaDeSalas().toString());
-
-
-
-        try {
-            manager.reservaSalaChamada("amarela",
-                    LocalDateTime.of(2021, 8, 10, 9, 0),
-                    LocalDateTime.of(2021, 8, 10, 11, 0));
-        } catch (SalaInexistente e){
-            System.out.println(e.getMessageName() +": A sala pedida não existe");
-        } catch (HorarioConflitante e){
-            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
-        }
-
-        try {
-            manager.reservaSalaChamada("amarela",
-                    LocalDateTime.of(2021, 8, 10, 10, 0),
-                    LocalDateTime.of(2021, 8, 10, 12, 0));
-        } catch (SalaInexistente e){
-            System.out.println(e.getMessageName() +": A sala pedida não existe");
-        } catch (HorarioConflitante e){
-            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
-        }
-
-        try {
-            manager.reservaSalaChamada("amarela",
-                    LocalDateTime.of(2021, 8, 10, 8, 0),
-                    LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente e){
-            System.out.println(e.getMessageName() +": A sala pedida não existe");
-        } catch (HorarioConflitante e){
-            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
-        }
-
-        try {
-            manager.reservaSalaChamada("azul",
-                    LocalDateTime.of(2021, 8, 10, 8, 0),
-                    LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente e){
-            System.out.println(e.getMessageName() +": A sala pedida não existe");
-        } catch (HorarioConflitante e){
-            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
-        }
-
-        try {
-            manager.reservaSalaChamada("cor de burro quando foge",
-                    LocalDateTime.of(2021, 8, 10, 8, 0),
-                    LocalDateTime.of(2021, 8, 10, 9, 1));
-        } catch (SalaInexistente e){
-            System.out.println(e.getMessageName() +": A sala pedida não existe");
-        } catch (HorarioConflitante e){
-            System.out.println(e.getMessageName()+": A Sala está ocupada no horário escolhido");
-        }
-
-
-        System.out.println(manager.reservasParaSala("amarela"));
-
-        manager.cancelaReserva(new Reserva("amarela",
-                LocalDateTime.of(2021, 8, 10, 10, 0),
-                LocalDateTime.of(2021, 8, 10, 12, 0)));
-
-
-
-        manager.imprimeReservaDaSala("azul");
-
-
-
-        participantes.add("Duda");
-        participantes.add("Frodo");
-        participantes.add("Gii");
-
-        mr.marcarReuniaoEntre(LocalDate.of(2021,10,2),
-                LocalDate.of(2021,10,3),participantes);
-
-        mr.indicaDisponibilidadeDe("Duda",
-                LocalDateTime.of(2021,10,2,20,0),
-                LocalDateTime.of(2021,10,2,21,0));
-        mr.indicaDisponibilidadeDe("Frodo",
-                LocalDateTime.of(2021,10,2,19,0),
-                LocalDateTime.of(2021,10,2,21,0));
-        mr.indicaDisponibilidadeDe("Gii",
-                LocalDateTime.of(2021,10,2,20,0),
-                LocalDateTime.of(2021,10,2,22,0));
-
-        mr.indicaDisponibilidadeDe("Balog",
-                LocalDateTime.of(2021,10,3,9,0),
-                LocalDateTime.of(2021,10,3,11,47));
-
-        mr.indicaDisponibilidadeDe("Gabs",
-                LocalDateTime.of(2021,10,3,9,0),
-                LocalDateTime.of(2021,10,3,12,0));
-
-        mr.indicaDisponibilidadeDe("Ana",
-                LocalDateTime.of(2021,10,3,8,0),
-                LocalDateTime.of(2021,10,3,13,0));
-        mr.mostraSobreposicao();
+        System.out.println("Encerrando o programa com sucesso");
+        System.out.println("Obrigado por usar");
+        System.out.println("Maria Eduarda Rodrigues - 11796122");
+        System.out.println("Gabriel Medeiros Jospin - 11796020");
     }
 }
