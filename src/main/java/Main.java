@@ -223,6 +223,7 @@ public class Main {
         System.out.println("3- Reservar Sala");
         System.out.println("4- Ver salas disponíveis");
         System.out.println("5- Ver reservas de uma sala");
+        System.out.println("6- Cancelar reserva");
         System.out.println("4- Sair");
         int option = scanner.nextInt();
         switch (option){

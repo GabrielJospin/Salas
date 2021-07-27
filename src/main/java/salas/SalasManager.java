@@ -84,13 +84,12 @@ public class SalasManager {
     }
 
     public void imprimeReservaDaSala(String nomeSala){
-        for (Sala sala : salaList) {
-            if (sala.getNome().toLowerCase().equals(nomeSala.toLowerCase())) {
-                sala.getReservaList().forEach(reserva -> {
-                    System.out.printf("Reserva das %s as %s\n",reserva.getDataInicial(),reserva.getDataFinal());
-                });
-            }
-        }
+
+        Collection<Reserva> list = reservasParaSala(nomeSala);
+        list.forEach(reserva ->{
+            System.out.printf("Reserva das %s as %s\n",reserva.getDataInicial(),reserva.getDataFinal());
+        });
+
     }
 
 
