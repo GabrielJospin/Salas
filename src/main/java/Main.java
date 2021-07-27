@@ -220,6 +220,8 @@ public class Main {
         System.out.println("1- Cadastrar Salas");
         System.out.println("2- planejar reunião");
         System.out.println("3- Reservar Sala");
+        System.out.println("4- Ver salas disponíveis");
+        System.out.println("5- Ver");
         System.out.println("4- Sair");
         int option = scanner.nextInt();
         switch (option){
@@ -232,6 +234,9 @@ public class Main {
             case 3:
                 reservarSala();
                 break;
+            case 4:
+                listaDeSalas();
+                break;
             case 42:
                 answer();
                 break;
@@ -239,6 +244,20 @@ public class Main {
                 break;
         }
 
+    }
+
+    private static void listaDeSalas() {
+        SalasManager sm = SalasManager.instanceOfSalasManager();
+        List<Sala> salas = sm.listaDeSalas();
+        salas.forEach(sala -> {
+            System.out.printf("Sala: %s, capacidade: %d, Descrição: %s",
+                    sala.getNome(), sala.getCapacidadeMax(),sala.getDescricao());
+            if(!sala.getLocal().isEmpty())
+                System.out.printf(", Local: %s",sala.getLocal());
+            if(!sala.getObservacoes().isEmpty())
+                System.out.printf(", P.S.: %s",sala.getObservacoes());
+            System.out.println();
+        });
     }
 
     private static void answer() {
