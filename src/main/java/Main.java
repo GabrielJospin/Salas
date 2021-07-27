@@ -27,20 +27,20 @@ public class Main {
             System.out.println("Escreva uma breve descrição de 1 linha da sala");
             String desc = scanner.nextLine();
 
-            SalasManager salasManager = SalasManager.instanceOfSalasManager();
-            salasManager.adicionaSalaChamada(nome, capacidade, desc);
+            SalasManager sm = SalasManager.instanceOfSalasManager();
+            sm.adicionaSalaChamada(nome, capacidade, desc);
 
             System.out.println("Quer fazer um cadastro mais detalhado? 1-sim/ 0-não");
             int answer = scanner.nextInt();
             if(answer==1){
-                int position = salasManager.listaDeSalas().indexOf(new Sala(nome,capacidade,desc));
+                int position = sm.listaDeSalas().indexOf(new Sala(nome,capacidade,desc));
 
 
                 System.out.println("qual o local da sala?");
-                salasManager.listaDeSalas().get(position).setLocal(scanner.nextLine());
+                sm.listaDeSalas().get(position).setLocal(scanner.nextLine());
 
                 System.out.println("alguma observação? ");
-                salasManager.listaDeSalas().get(position).setObservacoes(scanner.nextLine());
+                sm.listaDeSalas().get(position).setObservacoes(scanner.nextLine());
             }
 
             System.out.println("Deseja cadastrar nova sala? 1- sim/ 0-não");
@@ -59,7 +59,28 @@ public class Main {
     }
 
     private static void reservarSala() {
+        try {
+            SalasManager sm = SalasManager.instanceOfSalasManager();
+            System.out.println("Opa, então vamos reservar a Sala");
+            System.out.println("Primeiro vamos precizar do nome da Sala");
+            String sala = scanner.nextLine();
+            System.out.println("Certo agora o horário inicial da reserva");
+            LocalDateTime inicio = inserirHorario();
+            System.out.println("O Horário final desta reserva");
+            LocalDateTime fim = inserirHorario();
+            sm.reservaSalaChamada(sala,inicio,fim);
 
+        }catch (SalaInexistente salaInexistente) {
+            System.out.println("Opa parece que esta sala é inexistente");
+            System.out.println("Tudo bem vamos tentar de novo....");
+            reservarSala();
+        } catch (HorarioConflitante horarioConflitante) {
+            System.out.println("Poxa, alguém já marcou nesse horário");
+            System.out.println("Vamos tentar outra sala ou horário:");
+            reservarSala();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private static void planejarReuniao() {
@@ -92,7 +113,11 @@ public class Main {
             mr.mostraSobreposicao();
 
             System.out.println("Se você voltar ao menu agora podemos marcar essa reunião...");
-        }catch (Exception e){
+        }catch (NullPointerException e){
+            System.out.println("Opa parece que não houve um horario com todos disponiveis");
+            System.out.println("Mas tudo bem vamos tentar re-planejá-la");
+            planejarReuniao();
+        } catch (Exception e){
             System.out.println("Opa parece que você digitou algum dado invalido");
             System.out.println("Está tudo bem, vamos tentar de novo");
             planejarReuniao();
