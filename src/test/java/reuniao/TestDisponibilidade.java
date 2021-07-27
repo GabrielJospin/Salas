@@ -1,10 +1,12 @@
 package reuniao;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class TestDisponibilidade {
 
@@ -32,17 +34,17 @@ public class TestDisponibilidade {
         if(disponibilidade == null)
             fail("Erro ao criar construtor");
 
-        assertEquals("Erro no getInicio()",LocalDateTime.of(2021,12,10,0,0),disponibilidade.getInicio());
+        assertEquals(LocalDateTime.of(2021,12,10,0,0), disponibilidade.getInicio(), "Erro no getInicio()");
         disponibilidade.setInicio(LocalDateTime.of(2021,12,11,0,0));
-        assertEquals("Erro no setInicio()",LocalDateTime.of(2021,12,11,0,0),disponibilidade.getInicio());
+        assertEquals(LocalDateTime.of(2021,12,11,0,0), disponibilidade.getInicio(), "Erro no setInicio()");
     }
 
     public void testFim(Disponibilidade disponibilidade){
         if(disponibilidade == null)
             fail("Erro ao criar construtor");
 
-        assertEquals("Erro no getFim()",LocalDateTime.of(2021,12,11,23,59),disponibilidade.getFim());
+        assertEquals(LocalDateTime.of(2021,12,11,23,59), disponibilidade.getFim(), "Erro no getFim()");
         disponibilidade.setFim(LocalDateTime.of(2021,12,12,0,0));
-        assertEquals("Erro no setFim()",LocalDateTime.of(2021,12,12,0,0),disponibilidade.getFim());
+        assertEquals(LocalDateTime.of(2021,12,12,0,0), disponibilidade.getFim(), "Erro no setFim()");
     }
 }

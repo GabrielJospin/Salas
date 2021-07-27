@@ -1,12 +1,13 @@
 package reuniao;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TestReuniao {
 
@@ -29,24 +30,24 @@ public class TestReuniao {
 
     private void testMail(Reuniao reuniao,List<String> mails) {
         List<String> strings = reuniao.getMail();
-        assertEquals("Erro em getMail()",mails.size(),strings.size(),0.0);
+        assertEquals(mails.size(),strings.size(),"Erro em getMail()");
         for(int i = 0; i < mails.size(); i++)
             assertEquals("Erro get Mail()",mails.get(i),strings.get(i));
     }
 
     private void testDisponibilidade(Reuniao reuniao) {
-        assertEquals("Iniciação não nula",new ArrayList<>(),reuniao.getDisponibilidade());
+        assertEquals(new ArrayList<>(),reuniao.getDisponibilidade(),"Iniciação não nula");
     }
 
     private void testFim(Reuniao reuniao) {
-        assertEquals("Erro no getFim",LocalDate.of(2021,10,15),reuniao.getFim());
+        assertEquals(LocalDate.of(2021,10,15), reuniao.getFim(), "Erro no getFim");
         reuniao.setFim(LocalDate.of(2021,10,18));
-        assertEquals("Erro no setFim",LocalDate.of(2021,10,18),reuniao.getFim());
+        assertEquals(LocalDate.of(2021,10,18), reuniao.getFim(), "Erro no setFim");
     }
 
     private void testInicio(Reuniao reuniao) {
-        assertEquals("Erro no getInicio",LocalDate.of(2021,10,12),reuniao.getInicio());
+        assertEquals(LocalDate.of(2021,10,12), reuniao.getInicio(), "Erro no getInicio");
         reuniao.setInicio(LocalDate.of(2021,10,11));
-        assertEquals("Erro no setInicio",LocalDate.of(2021,10,11),reuniao.getInicio());
+        assertEquals(LocalDate.of(2021,10,11), reuniao.getInicio(), "Erro no setInicio");
     }
 }
