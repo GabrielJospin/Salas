@@ -69,7 +69,7 @@ public class Main {
             System.out.println("O Horário final desta reserva");
             LocalDateTime fim = inserirHorario();
             sm.reservaSalaChamada(sala,inicio,fim);
-
+            hello();
         }catch (SalaInexistente salaInexistente) {
             System.out.println("Opa parece que esta sala é inexistente");
             System.out.println("Tudo bem vamos tentar de novo....");
@@ -113,6 +113,7 @@ public class Main {
             mr.mostraSobreposicao();
 
             System.out.println("Se você voltar ao menu agora podemos marcar essa reunião...");
+            hello();
         }catch (NullPointerException e){
             System.out.println("Opa parece que não houve um horario com todos disponiveis");
             System.out.println("Mas tudo bem vamos tentar re-planejá-la");
@@ -221,7 +222,7 @@ public class Main {
         System.out.println("2- planejar reunião");
         System.out.println("3- Reservar Sala");
         System.out.println("4- Ver salas disponíveis");
-        System.out.println("5- Ver");
+        System.out.println("5- Ver reservas de uma sala");
         System.out.println("4- Sair");
         int option = scanner.nextInt();
         switch (option){
@@ -237,6 +238,9 @@ public class Main {
             case 4:
                 listaDeSalas();
                 break;
+            case 5:
+                listaDeReservas();
+                break;
             case 42:
                 answer();
                 break;
@@ -246,7 +250,21 @@ public class Main {
 
     }
 
+    private static void listaDeReservas() {
+        SalasManager sm = SalasManager.instanceOfSalasManager();
+
+        System.out.println("Bem vamos ver as reservas de uma sala");
+        System.out.println("Qual sala você deseja procurar?");
+        String sala = scanner.nextLine();
+        System.out.printf("Reservas para a sala %s \n",sala);
+
+        sm.reservasParaSala(sala).forEach( s ->{
+            System.out.printf("das %s às %s\n", s.getDataInicial(), s.getDataFinal());
+        });
+    }
+
     private static void listaDeSalas() {
+        System.out.println("Bem estas são as salas disponíveis: ");
         SalasManager sm = SalasManager.instanceOfSalasManager();
         List<Sala> salas = sm.listaDeSalas();
         salas.forEach(sala -> {
@@ -258,6 +276,7 @@ public class Main {
                 System.out.printf(", P.S.: %s",sala.getObservacoes());
             System.out.println();
         });
+        hello();
     }
 
     private static void answer() {
@@ -272,6 +291,7 @@ public class Main {
         }
         System.out.println();
         System.out.println("42");
+        hello();
     }
 
 
