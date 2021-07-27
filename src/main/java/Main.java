@@ -265,8 +265,7 @@ public class Main {
             LocalDateTime inicio = inserirHorario();
             System.out.println("Qual o horario do fim");
             LocalDateTime fim  = inserirHorario();
-
-            sm.removeSalaChamada(sala);
+            sm.cancelaReserva(new Reserva(sala,inicio,fim));
         }catch (Exception e){
             System.out.println("Opa tivemos um erro de inserção");
             System.out.println("vamos tentar novamente");
