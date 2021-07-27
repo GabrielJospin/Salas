@@ -232,10 +232,27 @@ public class Main {
             case 3:
                 reservarSala();
                 break;
+            case 42:
+                answer();
+                break;
             default:
                 break;
         }
 
+    }
+
+    private static void answer() {
+        System.out.println("the answer to life the universe and everything is");
+        for (int i = 0; i <20; i++){
+            try {
+                Thread.sleep(100);
+                System.out.print(".");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println();
+        System.out.println("42");
     }
 
 
