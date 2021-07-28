@@ -18,10 +18,11 @@ public class Main {
             System.out.println("");
 
             System.out.println("Qual o nome da sala? ");
-            String nome = scanner.next();
+            String nome = scanner.nextLine();
 
             System.out.println("Qual a capacidade máxima da sala? ");
             int capacidade = scanner.nextInt();
+            scanner.nextLine();
 
             System.out.println("Escreva uma breve descrição de 1 linha da sala");
             String desc = scanner.nextLine();
@@ -31,20 +32,21 @@ public class Main {
 
             System.out.println("Quer fazer um cadastro mais detalhado? 1-sim/ 0-não");
             int answer = scanner.nextInt();
+            scanner.nextLine();
             if(answer==1){
-                int position = sm.listaDeSalas().indexOf(new Sala(nome,capacidade,desc));
-
+                int position = sm.listaDeSalas().size() -1;
 
                 System.out.println("qual o local da sala?");
-                sm.listaDeSalas().get(position).setLocal(scanner.nextLine());
-
+                String local = scanner.nextLine();
+                sm.listaDeSalas().get(position).setLocal(local);
                 System.out.println("alguma observação? ");
-                sm.listaDeSalas().get(position).setObservacoes(scanner.nextLine());
+                String obs = scanner.nextLine();
+                sm.listaDeSalas().get(position).setObservacoes(obs);
             }
 
             System.out.println("Deseja cadastrar nova sala? 1- sim/ 0-não");
             answer = scanner.nextInt();
-
+            scanner.nextLine();
             if(answer==1)
                 cadastrarSala(scanner);
             else
@@ -53,6 +55,7 @@ public class Main {
         }catch (Exception e){
             System.out.println("Opa, parece que você inseriu um dado invalido");
             System.out.println("Errar faz parte da vida, o importante é não desistir");
+            e.printStackTrace();
             cadastrarSala(scanner);
         }
     }
@@ -62,7 +65,7 @@ public class Main {
             SalasManager sm = SalasManager.instanceOfSalasManager();
             System.out.println("Opa, então vamos reservar a Sala");
             System.out.println("Primeiro vamos precisar do nome da Sala (uma só palavra)");
-            String sala = scanner.next();
+            String sala = scanner.nextLine();
             System.out.println("Certo agora o horário inicial da reserva");
             LocalDateTime inicio = inserirHorario(scanner);
             System.out.println("O Horário final desta reserva");
@@ -141,6 +144,7 @@ public class Main {
 
             System.out.println("Você quer cadastrar mais alguma disponibilidade (1- sim/ 0- não)");
             int answer = scanner.nextInt();
+            scanner.nextLine();
             if(answer == 1)
                 marcarDisponibilidade(mr,scanner);
         }catch (Exception e){
@@ -158,22 +162,27 @@ public class Main {
             System.out.print("Ano: ");
             int year = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             System.out.print("Mês: ");
             int month = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             System.out.print("dia: ");
             int day = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             System.out.print("Hora: ");
             int hour = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             System.out.print("Minutos: ");
             int minute = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             return LocalDateTime.of(year,month,day,hour,minute);
         }catch (Exception e){
@@ -197,10 +206,12 @@ public class Main {
             System.out.print("Mês: ");
             int month = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             System.out.print("dia: ");
             int day = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             return LocalDate.of(year,month,day);
         }catch (Exception e){
@@ -225,6 +236,7 @@ public class Main {
         System.out.println("6- Cancelar reserva");
         System.out.println("7- Sair");
         int option = scanner.nextInt();
+        scanner.nextLine();
         switch (option){
             case 1:
                 cadastrarSala(scanner);
