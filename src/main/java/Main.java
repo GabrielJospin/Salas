@@ -296,6 +296,8 @@ public class Main {
         System.out.printf("Reservas para a sala %s \n",sala);
 
         sm.imprimeReservaDaSala(sala);
+
+        hello(scanner);
     }
 
     private static void listaDeSalas(Scanner scanner) {
