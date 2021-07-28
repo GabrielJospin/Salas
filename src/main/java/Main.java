@@ -8,6 +8,7 @@ import salas.SalasManager;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
 
@@ -258,6 +259,7 @@ public class Main {
                 break;
             case 6:
                 cancelarReserva(scanner);
+                break;
             case 42:
                 answer(scanner);
                 break;
@@ -277,14 +279,29 @@ public class Main {
             String sala = scanner.nextLine();
             System.out.println("Qual o horário de inicio");
             LocalDateTime inicio = inserirHorario(scanner);
-            System.out.println("Qual o horario do fim");
-            LocalDateTime fim  = inserirHorario(scanner);
-            sm.cancelaReserva(new Reserva(sala,inicio,fim));
+
+            List<Sala> salas = sm.listaDeSalas();
+
+            for(Sala s: salas){
+                if(s.getNome().toLowerCase().equals(sala.toLowerCase())){
+                    List<Reserva> reservas = s.getReservaList();
+                    for(Reserva r: reservas){
+                        if(r.getDataInicial().compareTo(inicio) == 0){
+                            sm.cancelaReserva(r);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
         }catch (Exception e){
             System.out.println("Opa tivemos um erro de inserção");
             System.out.println("vamos tentar novamente");
+            e.printStackTrace();
             cancelarReserva(scanner);
         }
+        hello(scanner);
     }
 
     private static void listaDeReservas(Scanner scanner) {
