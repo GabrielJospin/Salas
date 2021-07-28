@@ -22,6 +22,9 @@ dependencies {
     implementation group: 'com.sun.xml.ws', name: 'jaxws-rt', version: '2.1.4'
 }
 
+run{
+    standardInput = System.in
+}
 application{
     mainClassName = JavaMainClass
 }
