@@ -96,10 +96,13 @@ public class Main {
             LocalDate inicio = inserirData(scanner);
             System.out.println( "Até quando pode terminar essa reuniao? ");
             LocalDate fim = inserirData(scanner);
-            System.out.println("Digite o email de todos os participantes com um Espaço");
+            System.out.println("Digite o email de todos os participantes com um Espaço, no fim de um espaço e um ponto");
 
             List<String> mail = new ArrayList<>();
             while(scanner.hasNext()){
+                String text = scanner.next();
+                if(text.equals("."))
+                    break;
                 mail.add(scanner.next());
             }
 
@@ -302,9 +305,9 @@ public class Main {
         salas.forEach(sala -> {
             System.out.printf("Sala: %s, capacidade: %d, Descrição: %s",
                     sala.getNome(), sala.getCapacidadeMax(),sala.getDescricao());
-            if(!sala.getLocal().isEmpty())
+            if(sala.getLocal() != null && !sala.getLocal().isEmpty())
                 System.out.printf(", Local: %s",sala.getLocal());
-            if(!sala.getObservacoes().isEmpty())
+            if(sala.getObservacoes() != null && !sala.getObservacoes().isEmpty())
                 System.out.printf(", P.S.: %s",sala.getObservacoes());
             System.out.println();
         });

@@ -8,21 +8,23 @@ import java.util.*;
 
 public class SalasManager {
 
-    private final List<Sala> salaList;
+    private static List<Sala> salaList;
 
     private static SalasManager salasManager;
 
     private SalasManager() {
-        this.salaList = new ArrayList<>();
+        super();
+        salaList = new ArrayList<>();
     }
 
-    public static SalasManager instanceOfSalasManager(){
+    public static synchronized SalasManager instanceOfSalasManager(){
 
-        if(salasManager != null){
+        if(salasManager instanceof SalasManager){
             return salasManager;
         }
 
-        return new SalasManager();
+        salasManager = new SalasManager();
+        return salasManager;
     }
 
 
