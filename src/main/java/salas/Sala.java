@@ -30,12 +30,15 @@ public class Sala {
     }
 
     public void testReserva(Reserva reservaDaLista, Reserva reservaInserida) throws HorarioConflitante {
-        int comapare = reservaDaLista.getDataInicial().compareTo(reservaInserida.getDataInicial());
-        if(reservaDaLista.getDataInicial().compareTo(reservaInserida.getDataInicial()) > 0){
+        int comaparewithInit = reservaDaLista.getDataInicial().compareTo(reservaInserida.getDataInicial());
+        int comaparewithEnd = reservaDaLista.getDataInicial().compareTo(reservaInserida.getDataFinal());
+        if(comaparewithInit > 0 && comaparewithEnd < 0){
            throw new HorarioConflitante();
         }
-        comapare = reservaDaLista.getDataFinal().compareTo(reservaInserida.getDataFinal());
-        if(reservaDaLista.getDataFinal().compareTo(reservaInserida.getDataFinal()) < 0){
+
+        comaparewithInit = reservaDaLista.getDataFinal().compareTo(reservaInserida.getDataInicial());
+        comaparewithEnd = reservaDaLista.getDataFinal().compareTo(reservaInserida.getDataFinal());
+        if(comaparewithInit > 0 && comaparewithEnd < 0){
             throw new HorarioConflitante();
         }
 
