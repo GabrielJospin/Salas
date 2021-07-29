@@ -3,12 +3,11 @@ import exception.SalaInexistente;
 import reuniao.MarcadorDeReuniao;
 import salas.Reserva;
 import salas.Sala;
-import salas.SalasManager;
+import salas.GerenciadorDeSalas;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
 
@@ -28,7 +27,7 @@ public class Main {
             System.out.println("Escreva uma breve descrição de 1 linha da sala");
             String desc = scanner.nextLine();
 
-            SalasManager sm = SalasManager.instanceOfSalasManager();
+            GerenciadorDeSalas sm = GerenciadorDeSalas.instanceOfSalasManager();
             sm.adicionaSalaChamada(nome, capacidade, desc);
 
             System.out.println("Quer fazer um cadastro mais detalhado? 1-sim/ 0-não");
@@ -63,7 +62,7 @@ public class Main {
 
     private static void reservarSala(Scanner scanner) {
         try {
-            SalasManager sm = SalasManager.instanceOfSalasManager();
+            GerenciadorDeSalas sm = GerenciadorDeSalas.instanceOfSalasManager();
             System.out.println("Opa, então vamos reservar a Sala");
             System.out.println("Primeiro vamos precisar do nome da Sala (uma só palavra)");
             String sala = scanner.nextLine();
@@ -273,7 +272,7 @@ public class Main {
         System.out.println("Opa então vamos cançelar esta reserva");
         System.out.println("Para isso precisaremos dos dados desta reserva");
         try{
-            SalasManager sm = SalasManager.instanceOfSalasManager();
+            GerenciadorDeSalas sm = GerenciadorDeSalas.instanceOfSalasManager();
 
             System.out.println("Qual a sala reservada?");
             String sala = scanner.nextLine();
@@ -305,7 +304,7 @@ public class Main {
     }
 
     private static void listaDeReservas(Scanner scanner) {
-        SalasManager sm = SalasManager.instanceOfSalasManager();
+        GerenciadorDeSalas sm = GerenciadorDeSalas.instanceOfSalasManager();
 
         System.out.println("Bem vamos ver as reservas de uma sala");
         System.out.println("Qual sala você deseja procurar?");
@@ -319,7 +318,7 @@ public class Main {
 
     private static void listaDeSalas(Scanner scanner) {
         System.out.println("Bem estas são as salas disponíveis: ");
-        SalasManager sm = SalasManager.instanceOfSalasManager();
+        GerenciadorDeSalas sm = GerenciadorDeSalas.instanceOfSalasManager();
         List<Sala> salas = sm.listaDeSalas();
         salas.forEach(sala -> {
             System.out.printf("Sala: %s, capacidade: %d, Descrição: %s",

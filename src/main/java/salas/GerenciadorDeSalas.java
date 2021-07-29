@@ -6,25 +6,25 @@ import exception.SalaInexistente;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class SalasManager {
+public class GerenciadorDeSalas {
 
     private static List<Sala> salaList;
 
-    private static SalasManager salasManager;
+    private static GerenciadorDeSalas gerenciadorDeSalas;
 
-    private SalasManager() {
+    private GerenciadorDeSalas() {
         super();
         salaList = new ArrayList<>();
     }
 
-    public static synchronized SalasManager instanceOfSalasManager(){
+    public static synchronized GerenciadorDeSalas instanceOfSalasManager(){
 
-        if(salasManager instanceof SalasManager){
-            return salasManager;
+        if(gerenciadorDeSalas instanceof GerenciadorDeSalas){
+            return gerenciadorDeSalas;
         }
 
-        salasManager = new SalasManager();
-        return salasManager;
+        gerenciadorDeSalas = new GerenciadorDeSalas();
+        return gerenciadorDeSalas;
     }
 
 

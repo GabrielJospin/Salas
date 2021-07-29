@@ -64,7 +64,7 @@ public class MarcadorDeReuniao {
             int value = disponibilidade.get(position);
             if (value == reuniao.getQtdParticipantes()) {
                 disponibilidadeList.add(new Disponibilidade("all", position, position.plus(1, ChronoUnit.HOURS)));
-                System.out.printf("Todos os participantes disponíveis as: %d:%d do dia %s (%d/%s/%d) \n",
+                System.out.printf("Todos os participantes disponíveis as: %02d:%02d do dia %s (%d/%s/%d) \n",
                         position.getHour(),
                         position.getMinute(),
                         position.getDayOfWeek().toString(),

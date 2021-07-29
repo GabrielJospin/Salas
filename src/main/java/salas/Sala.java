@@ -29,7 +29,7 @@ public class Sala {
         reservaList.add(reserva);
     }
 
-    public void testReserva(Reserva reservaDaLista, Reserva reservaInserida) throws HorarioConflitante {
+    private void testReserva(Reserva reservaDaLista, Reserva reservaInserida) throws HorarioConflitante {
         int comaparewithInit = reservaDaLista.getDataInicial().compareTo(reservaInserida.getDataInicial());
         int comaparewithEnd = reservaDaLista.getDataFinal().compareTo(reservaInserida.getDataInicial());
         if(comaparewithInit < 0 && comaparewithEnd > 0){

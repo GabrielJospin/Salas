@@ -4,7 +4,7 @@ import exception.HorarioConflitante;
 import exception.SalaInexistente;
 import org.junit.jupiter.api.Test;
 import salas.Sala;
-import salas.SalasManager;
+import salas.GerenciadorDeSalas;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -13,11 +13,11 @@ import static junit.framework.Assert.assertTrue;
 
 public class TestSalaManager {
 
-    SalasManager salasManager;
+    GerenciadorDeSalas gerenciadorDeSalas;
 
     @Test
     public void test(){
-        salasManager = SalasManager.instanceOfSalasManager();
+        gerenciadorDeSalas = GerenciadorDeSalas.instanceOfSalasManager();
 
         try {
             testCriarSala();
@@ -28,16 +28,16 @@ public class TestSalaManager {
     }
 
     private void testReservaSala() throws SalaInexistente, HorarioConflitante {
-        salasManager.reservaSalaChamada("SalaA", LocalDateTime.now(),
+        gerenciadorDeSalas.reservaSalaChamada("SalaA", LocalDateTime.now(),
                 LocalDateTime.now().plus(1, ChronoUnit.HOURS));
     }
 
     private void testCriarSala() {
-        salasManager.adicionaSalaChamada("SalaA",55,"desc");
-        assertTrue(salasManager.listaDeSalas().contains(new Sala("SalaA",55,"desc")));
-        salasManager.removeSalaChamada("SalaS");
-        assertTrue(salasManager.listaDeSalas().contains(new Sala("SalaA",55,"desc")));
-        salasManager.adicionaSalaChamada("SalaA",55,"desc");
+        gerenciadorDeSalas.adicionaSalaChamada("SalaA",55,"desc");
+        assertTrue(gerenciadorDeSalas.listaDeSalas().contains(new Sala("SalaA",55,"desc")));
+        gerenciadorDeSalas.removeSalaChamada("SalaS");
+        assertTrue(gerenciadorDeSalas.listaDeSalas().contains(new Sala("SalaA",55,"desc")));
+        gerenciadorDeSalas.adicionaSalaChamada("SalaA",55,"desc");
 
     }
 
