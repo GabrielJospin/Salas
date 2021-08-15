@@ -13,6 +13,10 @@ public class Sala {
     private String observacoes;
     private List<Reserva> reservaList;
 
+    public Sala() {
+
+    }
+
     public Sala(String nome, int capacidadeMax, String descricao) {
         this.nome = nome;
         this.capacidadeMax = capacidadeMax;
